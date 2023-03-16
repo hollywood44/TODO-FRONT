@@ -6,14 +6,16 @@ import axios from 'axios'
 import router from './router/router'
 import MainHeader from '@/components/MainHeader'
 import VueCookies from "vue-cookies";
-
+import store from "./store"
 
 loadFonts()
 axios.defaults.baseURL = 'http://localhost:8080'
 axios.defaults.withCredentials = true;
 
-// 인터셉터 설정
 
+
+
+// 인터셉터 설정
 axios.interceptors.response.use(
     success => success,
     async (error) => {
@@ -66,4 +68,5 @@ app
 .use(VueCookies)
 .use(vuetify)
 .use(router)
+.use(store)
 .mount('#app')
