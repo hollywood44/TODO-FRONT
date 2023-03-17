@@ -6,7 +6,6 @@ import axios from 'axios'
 import router from './router/router'
 import MainHeader from '@/components/MainHeader'
 import VueCookies from "vue-cookies";
-import store from "./store"
 
 loadFonts()
 axios.defaults.baseURL = 'http://localhost:8080'
@@ -19,8 +18,6 @@ axios.defaults.withCredentials = true;
 axios.interceptors.response.use(
     success => success,
     async (error) => {
-        // console.log("인터셉터");
-        // console.log(error)
 
         const errorCode = error.code;
         const errorMsg = error.response.data.message;
@@ -38,7 +35,7 @@ axios.interceptors.response.use(
             const originRequest = error.config;
             console.log("new token 시도")
             await axios.post('/api/auth/new-token',{},
-            { headers : { Authorization : localStorage.getItem("grantType") + " " + localStorage.getItem("accessToken")}}
+            { headers : {'Authorization' : localStorage.getItem("accessToken")}}
             )
             .then(result => {
                 console.log(result);
@@ -53,7 +50,6 @@ axios.interceptors.response.use(
         else {
             return Promise.reject(error);
         }
-        // return Promise.reject(error);
     }
 )
 
@@ -68,5 +64,4 @@ app
 .use(VueCookies)
 .use(vuetify)
 .use(router)
-.use(store)
 .mount('#app')

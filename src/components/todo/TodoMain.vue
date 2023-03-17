@@ -11,10 +11,10 @@
 
     <div class="todo-content mt-16">
 
-        <div class="todo-item">
+        <div class="todo-item mt-5" v-for="todoItem in todoDataList" :key="todoItem.todoId">
             <div class="todo-detail">
-                <div>할일1</div>
-                <div>~ 2023-03-25</div>
+                <div>{{todoItem.todo}}</div>
+                <div>~ {{todoItem.finishDate}}</div>
             </div>
             <button>수정</button>
             <button>완료</button>
@@ -30,14 +30,36 @@ data(){
     return{
         todo : '',
         finishDate : '',
-        todoDataList : []
+        todoDataList : [],
     };
 },
-methods :{
-    submitTodo(){
+methods : {
+    async getTodoList(){
+        await this.axios.get('/api/todos/list',
+        {headers : {'Authorization' : localStorage.getItem("accessToken")}}
+        ).then(res => {
+            this.todoDataList = res.data;
+        }).catch(error => {
+            console.log(error)
+        })
     },
+    async submitTodo(){
+        await this.axios.post('/api/todos/posting',{'todo' : this.todo,'finishDate' : this.finishDate},{headers : {'Authorization' : localStorage.getItem("accessToken")}})
+        .then(res => {
+            if(res.status == 200){
+                this.getTodoList();
+                this.todo = '';
+                this.finishDate ='';
+            }
+        }).catch(error => {
+            alert(error.response.data.message)
+        })
+    }
+},
+mounted(){
+    this.getTodoList();
 }
-};
+}
 </script>
 
 <style scoped>
