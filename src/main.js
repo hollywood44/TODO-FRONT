@@ -6,6 +6,8 @@ import axios from 'axios'
 import router from './router/router'
 import MainHeader from '@/components/MainHeader'
 import VueCookies from "vue-cookies";
+import logout from '@/plugins/logout.js'
+
 
 loadFonts()
 axios.defaults.baseURL = 'http://localhost:8080'
@@ -30,6 +32,7 @@ axios.interceptors.response.use(
         if(customErrorCode && customErrorCode === 'JWT_0003'){
             const msg = '리프레쉬 토큰 만료됨 엑세스토큰 리프레쉬 토큰 제거해야함 즉 로그아웃'
             console.log(msg)
+            logout();
             return Promise.reject(msg);
         }else if(errorCode === 'ERR_BAD_REQUEST' && errorMsg === 'Access Denied' || errorCode === 'ERR_NETWORK'){
             const originRequest = error.config;
@@ -39,13 +42,13 @@ axios.interceptors.response.use(
             )
             .then(result => {
                 console.log(result);
-                localStorage.setItem('accessToken',result.data.response.accessToken);
+                localStorage.setItem('accessToken',result.data.grantType +" " +result.data.accessToken);
                 window.location.reload()
             }).catch(error => {
+                logout();
                 console.log("new token 시도 했는데 리프레쉬 토큰 만료됨 엑세스토큰 리프레쉬 토큰 제거해야함 즉 로그아웃")
             });
             return Promise.reject(error);
-
         }
         else {
             return Promise.reject(error);
@@ -64,4 +67,5 @@ app
 .use(VueCookies)
 .use(vuetify)
 .use(router)
+.use(logout)
 .mount('#app')

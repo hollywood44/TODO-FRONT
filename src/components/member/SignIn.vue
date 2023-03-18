@@ -24,7 +24,6 @@ export default {
                 console.log(response);
 
                 localStorage.setItem("accessToken",response.data.grantType + " " + response.data.accessToken);
-                localStorage.setItem("grantType",response.data.grantType);
 
                 await this.axios.get("/api/auth/userinfo"
                 ,{headers :
@@ -34,9 +33,6 @@ export default {
                     localStorage.setItem('isLogin',true);
                     this.$router.go(0);
                 })
-
-
-
             }catch(error){
                 console.log("error");
                 console.log(error.response.data);

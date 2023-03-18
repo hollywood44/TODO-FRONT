@@ -7,7 +7,7 @@
       <div class="nav-item me-3">Item2</div>
       <div class="nav-item me-3" v-if="checkLogin">MemberId</div>
       <div class="nav-item me-3" v-if="!checkLogin"><router-link to='/sign-in'>로그인</router-link></div>
-      <button class="nav-item me-3" @click="logout" v-if="checkLogin">로그아웃</button>
+      <button class="nav-item me-3" @click="this.$logout" v-if="checkLogin">로그아웃</button>
     </v-toolbar>
 </v-layout>
 
@@ -23,28 +23,6 @@ export default {
     }
   },
   methods :{
-    async logout(){
-      await this.axios.post('/api/auth/sign-out',{},
-        {headers : {'Authorization' : localStorage.getItem("accessToken")}}
-      ).then(res => {
-        console.log(res);
-
-        if(res.status === 200){
-          localStorage.setItem('isLogin',false);
-          localStorage.removeItem('memberId');
-          localStorage.removeItem('accessToken')
-          this.isLogin = localStorage.removeItem('isLogin');
-        }
-      }).catch(error => {
-        console.log(error)
-        console.log("log out failed")
-        });
-    }
-  },
-  watch:{
-    isLogin(){
-      this.$router.go(0);
-    }
   },
   computed:{
     checkLogin(){
