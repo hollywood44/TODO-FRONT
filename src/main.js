@@ -24,29 +24,25 @@ axios.interceptors.response.use(
         const errorCode = error.code;
         const errorMsg = error.response.data.message;
         const customErrorCode = error.response.data.errorCode;
-
-        // console.log("errorCode : " + errorCode)
-        // console.log("customErrorCode : " + customErrorCode)
-        // console.log("errorMsg : " + errorMsg)
-
-        if(customErrorCode && customErrorCode === 'JWT_0003'){
-            const msg = '리프레쉬 토큰 만료됨 엑세스토큰 리프레쉬 토큰 제거해야함 즉 로그아웃'
-            console.log(msg)
-            logout();
-            return Promise.reject(msg);
-        }else if(errorCode === 'ERR_BAD_REQUEST' && errorMsg === 'Access Denied' || errorCode === 'ERR_NETWORK'){
+        console.log('errorCode'+errorCode)
+        console.log('errorMsg'+errorMsg)
+        console.log('customErrorCode'+customErrorCode)
+        if(customErrorCode === 'JWT_0003'|| customErrorCode === 'JWT_0002'){ // 리프레쉬 토큰 만료로 로그아웃 해야 되는 상황
+            console.log('errorCode in if: '+errorCode)
+            console.log('errorMsg in if: '+errorMsg)
+            console.log('customErrorCode in if: '+customErrorCode)
+            this.logout;
+            // return Promise.reject(error);
+        }else if(errorMsg === 'JWT_0001'){ // 엑세스 토큰 만료로 토큰 재 발급 시도 해야 하는 상황
             const originRequest = error.config;
-            console.log("new token 시도")
             await axios.post('/api/auth/new-token',{},
             { headers : {'Authorization' : localStorage.getItem("accessToken")}}
             )
             .then(result => {
-                console.log(result);
                 localStorage.setItem('accessToken',result.data.grantType +" " +result.data.accessToken);
                 window.location.reload()
-            }).catch(error => {
-                logout();
-                console.log("new token 시도 했는데 리프레쉬 토큰 만료됨 엑세스토큰 리프레쉬 토큰 제거해야함 즉 로그아웃")
+            }).catch(error => { // 리프레쉬 토큰, 엑세스 토큰 모두 만료로 로그아웃
+                this.logout;
             });
             return Promise.reject(error);
         }

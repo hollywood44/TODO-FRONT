@@ -5,7 +5,8 @@ import TodoMain from '@/components/todo/TodoMain';
 import SignIn from '@/components/member/SignIn';
 import SignUp from '@/components/member/SignUp';
 import TodoModify from '@/components/todo/TodoModify';
-
+import BoardList from '@/components/board/BoardList';
+import BoardDetail from '@/components/board/BoardDetail';
 
 const router = createRouter({
     history : createWebHistory(),
@@ -22,6 +23,8 @@ const router = createRouter({
         { path : "/sign-up", name : "SignUp page",component : SignUp},
         { path : "/todo/main", name : "Todo main page", component : TodoMain,meta :{requiresAuth:true}},
         { path : "/todo/modify/:todoId", name : "todoModify", component : TodoModify,meta :{requiresAuth:true},props:true},
+        { path : '/board', name : "boardList", component : BoardList, meta :{requiresAuth:true}},
+        { path : '/board/:boardId', name: 'boardDetail', component : BoardDetail,meta :{requiresAuth:true},props:true},
         { path : "/:pathMatch(.*)",name : "not-found",component : ErrorPage},
     ]
 });

@@ -1,0 +1,88 @@
+table {
+    width: 100%;
+    border-top: 1px solid #444444;
+    border-collapse: collapse;
+  }
+  th, td {
+    border-bottom: 1px solid #444444;
+    padding: 10px;
+    text-align: center;
+  }
+  ul {
+    list-style: none;
+  }
+  li {
+    float: left;
+  }
+  ul :hover{
+    background-color: rgb(140, 197, 243);
+    color: white;
+  }
+  a{
+    text-decoration: none;
+    cursor: pointer;
+  }
+  #board-pagenation{
+    padding-top:40px;
+    padding-bottom:20px;
+    display:flex;
+    justify-content: center;
+  }
+  .page-item-side{
+    border: 1px solid black;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  .page-item{
+    border: 1px solid black;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  .pagination > .page-item-side:first-child{
+    border-right: none;
+    border-radius: 10px 0 0 10px;
+  }
+  .pagination > .page-item-side:last-child{
+    border-radius: 0 10px 10px 0;
+  }
+  .pagination > .page-item {
+    border-right: none;
+  }
+  .page-item:last-child{
+    border-right: 1px solid black;
+  }
+
+  #board,#board-answer{
+    position: relative;
+    min-height: 55vh;
+    height: auto;
+  }
+  #board-header,#footer-content{
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+  }
+  #board-title{
+    padding-top:5%;
+    padding-bottom:7%;
+  }
+  #board-footer{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+  #footer-content > div:last-child{
+    padding-left: 15px;
+  }
+  #board-answer{
+    padding-top: 15px;
+  }
+  #board-answer > hr{
+    height: 2px;
+    border: 0;
+    background-color: rgb(180, 203, 245);
+  }

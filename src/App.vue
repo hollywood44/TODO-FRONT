@@ -29,5 +29,6 @@ body {
 }
 #main-container {
   min-height: 60vh;
+  margin-bottom: 100px;
 }
 </style>
