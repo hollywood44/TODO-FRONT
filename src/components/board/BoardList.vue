@@ -5,6 +5,7 @@
       <tr>
         <th>번호</th>
         <th>제목</th>
+        <th>작성자</th>
         <th>최종 수정일</th>
         <th>답변 여부</th>
       </tr>
@@ -13,6 +14,7 @@
       <tr v-for="board in boardList" :key="board.boardId">
         <td>{{ board.boardId }}</td>
         <td><a @click="goToDetail(board.boardId)">{{ board.title }}</a></td>
+        <td>{{board.writer}}</td>
         <td>{{ board.modDate }}</td>
         <td>{{ board.answer ? "O" : "X" }}</td>
       </tr>

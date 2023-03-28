@@ -66,12 +66,32 @@ table {
     justify-content: space-between;
     padding: 5px;
   }
+  #footer-content-btn{
+    display: flex;
+    justify-content: end;
+    padding: 5px;
+  }
+  #footer-content-btn button{
+    margin-left: 5px;
+    border: 1px solid black;
+    padding: 5px;
+    border-radius: 5px;
+    min-width: 60px;
+    background-color: #42A5F5;
+    color: white;
+  }
+  #footer-content-btn .btn-del{
+    background-color: rgb(253, 79, 79);
+    color: white;
+  }
+
   #board-title{
     padding-top:5%;
     padding-bottom:7%;
   }
   #board-footer{
     position: absolute;
+    min-width: 100%;
     bottom: 0;
     left: 0;
   }
@@ -85,4 +105,29 @@ table {
     height: 2px;
     border: 0;
     background-color: rgb(180, 203, 245);
+  }
+  /* 포스팅, 수정 */
+  .form-div{
+    width: 100%;
+  }
+  .form-div > input,textarea{
+    width: 100%;
+    resize: none;
+    border: 1px solid black;
+    border-radius: 8px;
+    min-height: 40px;
+    padding: 5px;
+  }
+  .form-div > textarea{
+    min-height: 400px;
+  }
+  .form-div-btn{
+    text-align: end;
+  }
+  .form-div-btn > button{
+    border: 1px solid black;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 7px;
+    min-width: 60px;
   }
