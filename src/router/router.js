@@ -13,6 +13,8 @@ import FriendList from '@/components/friend/FriendList';
 import FollowRequestList from '@/components/friend/FollowRequestList';
 import FollowRequestedList from '@/components/friend/FollowRequestedList';
 import MyInfo from '@/components/member/MyInfo';
+import ChatRoom from '@/components/chat/ChatRoom';
+import ChatRoomList from '@/components/chat/ChatRoomList';
 
 const router = createRouter({
     history : createWebHistory(),
@@ -41,6 +43,9 @@ const router = createRouter({
         { path : '/friend/request', name: 'FollowRequestList', component : FollowRequestList,meta:{requiresAuth:true}},
         // member
         { path : '/member/info', name : 'MyInfo', component : MyInfo, meta:{requiresAuth:true}},
+        // chat
+        { path : '/chat/rooms', name : 'ChatRoomList', component : ChatRoomList, meta:{requiresAuth:true}},
+        { path : '/chat/:chatRoomId/:yourId', name : 'ChatRoom', component : ChatRoom, meta:{requiresAuth:true},props:true},
 
         { path : "/:pathMatch(.*)",name : "not-found",component : ErrorPage},
     ]
