@@ -12,6 +12,7 @@ import BoardModify from '@/components/board/BoardModify';
 import FriendList from '@/components/friend/FriendList';
 import FollowRequestList from '@/components/friend/FollowRequestList';
 import FollowRequestedList from '@/components/friend/FollowRequestedList';
+import MyInfo from '@/components/member/MyInfo';
 
 const router = createRouter({
     history : createWebHistory(),
@@ -38,7 +39,8 @@ const router = createRouter({
         { path : '/friend/list', name: 'friendList', component : FriendList,meta:{requiresAuth:true}},
         { path : '/friend/requested', name: 'FollowRequestedList', component : FollowRequestedList,meta:{requiresAuth:true}},
         { path : '/friend/request', name: 'FollowRequestList', component : FollowRequestList,meta:{requiresAuth:true}},
-
+        // member
+        { path : '/member/info', name : 'MyInfo', component : MyInfo, meta:{requiresAuth:true}},
 
         { path : "/:pathMatch(.*)",name : "not-found",component : ErrorPage},
     ]
