@@ -73,22 +73,22 @@ export default {
         .catch((err) => {
           alert(err.response.data.message);
         });
-      this.moveScrollToBottom()
+      this.moveScrollToBottom();
     },
 
     async sendMessage() {
       await this.stompClient.send(
         "/pub/chat/sendMessage/" + this.chatRoomId,
         JSON.stringify({
-          'chatRoomId': this.chatRoomId,
-          'senderId': this.myId,
-          'receiverId': this.yourId,
-          'message': this.message,
-          'chatTime': this.getTimeAndSec(),
+          chatRoomId: this.chatRoomId,
+          senderId: this.myId,
+          receiverId: this.yourId,
+          message: this.message,
+          chatTime: this.getTimeAndSec(),
         }),
-        { 'Authorization': localStorage.getItem("accessToken") }
+        { Authorization: localStorage.getItem("accessToken") }
       );
-      this.message = '';
+      this.message = "";
     },
 
     getTimeAndSec() {
@@ -104,11 +104,11 @@ export default {
       );
     },
 
-    moveScrollToBottom(){
+    moveScrollToBottom() {
       let chat = this.$refs.chat;
 
-      chat.scrollTo({top: chat.scrollHeight,behavior: 'smooth'})
-    }
+      chat.scrollTo({ top: chat.scrollHeight, behavior: "smooth" });
+    },
   },
   created() {
     this.connect();
@@ -116,16 +116,16 @@ export default {
   mounted() {
     this.getHistory();
   },
-  watch:{
+  watch: {
     chatList: {
-      deep:true,
-      handler(){
-        this.$nextTick(()=>{
+      deep: true,
+      handler() {
+        this.$nextTick(() => {
           this.moveScrollToBottom();
-        })
-      }
-    }
-  }
+        });
+      },
+    },
+  },
 };
 </script>
 

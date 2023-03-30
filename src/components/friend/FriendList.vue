@@ -1,6 +1,9 @@
 <template>
   <h1>친구 목록</h1>
-
+<div>
+    <button><router-link :to="{name :'FollowRequestedList'}">요청받은 목록</router-link></button>
+    <button><router-link :to="{name :'FollowRequestList'}">요청한 목록</router-link></button>
+</div>
   <div>
     <form @submit.prevent="followRequest">
         <div>

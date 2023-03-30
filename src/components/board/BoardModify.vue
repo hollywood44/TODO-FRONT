@@ -34,12 +34,15 @@ export default {
               .get("/api/boards/detail/modify/" + this.boardId, 
               {headers: { Authorization: localStorage.getItem("accessToken") }})
               .then((res) => {
-                console.log(res.data);
                 this.detail = res.data;
                 this.title = this.detail.title;
                 this.content = this.detail.content;
               })
               .catch((err) => {
+                if(err.response.data.errorCode == 'ACCESS_DENIED'){
+                  alert('권한없는 접근입니다.')
+                  this.$router.push('/board?page=1')
+                }
                 console.log(err);
               });
           },

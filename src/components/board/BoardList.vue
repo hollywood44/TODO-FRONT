@@ -27,14 +27,12 @@
         <li class="page-item-side" v-if="isPrev">
           <a class="page-link" :href="'/board?page=' + prevButton">Prev</a>
         </li>
-<!-- th:href="@{|?page=${page}|}" -->
         <li class="page-item" v-for="pageNum in pageCount" :key="pageNum">
           <a class="page-link" :href="'/board?page=' + pageClickButton(pageNum)">{{pageNum + displayPageNum}}</a>
         </li>
         <li class="page-item-side" v-if="isNext">
           <a class="page-link" :href="'/board?page=' + nextButton">Next</a>
         </li>
-
       </ul>
     </nav>
   </div>
@@ -64,7 +62,6 @@ export default {
           headers: { Authorization: localStorage.getItem("accessToken") },
         })
         .then((res) => {
-          console.log(res.data);
           this.boardList = res.data.content;
           this.totalPages = res.data.totalPages;
           this.currentNumber = res.data.number+1;
@@ -74,7 +71,6 @@ export default {
         });
     },
     async calcPageable(){
-        //https://mchch.tistory.com/140
         let startNum = this.currentNumber - (this.currentNumber%this.maxPage) +1;
         this.startNumber = startNum;
 

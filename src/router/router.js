@@ -15,6 +15,10 @@ import FollowRequestedList from '@/components/friend/FollowRequestedList';
 import MyInfo from '@/components/member/MyInfo';
 import ChatRoom from '@/components/chat/ChatRoom';
 import ChatRoomList from '@/components/chat/ChatRoomList';
+import BoardAnswer from '@/components/board/BoardAnswer';
+import NoticeList from '@/components/notice/Notice';
+import PrevNotice from '@/components/notice/PrevNotice';
+
 
 const router = createRouter({
     history : createWebHistory(),
@@ -37,12 +41,17 @@ const router = createRouter({
         { path : '/board/:boardId', name: 'boardDetail', component : BoardDetail,meta :{requiresAuth:true},props:true},
         { path : '/board/posting', name: 'boardPosting', component : BoardPosting,meta :{requiresAuth:true}},
         { path : '/board/modify/:boardId', name: 'boardModify', component : BoardModify,meta :{requiresAuth:true},props:true},
+        // admin
+        { path : '/board/answer/:boardId', name : 'boardAnswer', component : BoardAnswer,meta : {requiresAuth:true},props:true},
         // friend
         { path : '/friend/list', name: 'friendList', component : FriendList,meta:{requiresAuth:true}},
         { path : '/friend/requested', name: 'FollowRequestedList', component : FollowRequestedList,meta:{requiresAuth:true}},
         { path : '/friend/request', name: 'FollowRequestList', component : FollowRequestList,meta:{requiresAuth:true}},
         // member
         { path : '/member/info', name : 'MyInfo', component : MyInfo, meta:{requiresAuth:true}},
+        // notice
+        { path : '/notice', name : 'noticeList', component : NoticeList, meta:{requiresAuth:true}},
+        { path : '/notice/prev', name : 'prevNotice', component : PrevNotice, meta:{requiresAuth:true}},
         // chat
         { path : '/chat/rooms', name : 'ChatRoomList', component : ChatRoomList, meta:{requiresAuth:true}},
         { path : '/chat/:chatRoomId/:yourId', name : 'ChatRoom', component : ChatRoom, meta:{requiresAuth:true},props:true},

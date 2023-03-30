@@ -27,6 +27,8 @@ export default {
         alert("아이디 중복 확인을 해 주십시오");
       } else if (!this.memberId || !this.name || !this.password) {
         alert("빈값은 제출 하실 수 없습니다.");
+      } else if(this.memberId.indexOf('admin') != -1 || this.memberId.indexOf('ADMIN') != -1){
+        alert('admin 또는 ADMIN이 포함된 아이디로는 가입이 불가능 합니다.');
       } else {
         await this.axios
           .post("/api/auth/sign-up", {

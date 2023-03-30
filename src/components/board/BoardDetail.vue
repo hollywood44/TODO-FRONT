@@ -14,7 +14,8 @@
 
     <div id="board-footer">
       <div id="footer-content">
-        <div>등록일 : {{ detail.regDate }} | 수정일 : {{ detail.modDate }}</div>
+        <div>등록일 : {{ detail.regDate }} | 수정일 : {{ detail.modDate }} 
+          | <span v-if="checkAdmin"><button @click="goToAnswer()" v-if="!detail.answer">답변달기</button><button @click="goToModify(answer.boardId)" v-else>답변 수정하기</button></span></div>
       </div>
       <hr />
       <div id="footer-content-btn" v-if="checkWriter">
@@ -91,6 +92,12 @@ export default {
           }
         });
     },
+    async goToAnswer(){
+      this.$router.push({
+        name : 'boardAnswer',
+        params : {boardId : this.boardId}
+      })
+    },
   },
   mounted() {
     this.getDetail();
@@ -100,6 +107,13 @@ export default {
       if (localStorage.getItem("memberId") == this.detail.writer) {
         return true;
       } else {
+        return false;
+      }
+    },
+    checkAdmin(){
+      if(localStorage.getItem('memberId').startsWith('admin')){
+        return true;
+      }else{
         return false;
       }
     },
